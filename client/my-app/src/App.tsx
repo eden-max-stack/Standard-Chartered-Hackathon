@@ -10,9 +10,9 @@ import LandingPage from './LandingPage';
 
 const App: React.FC = () => {
   return (
-    <div>
+    <div> 
       <Router>
-        <Routes>
+      <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/ai-branch-manager" element={<VirtualAIBranchManager />} />
