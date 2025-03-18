@@ -36,7 +36,9 @@ app.use(express.json());
 app.use(cookieParser());
 
 // routes
+app.use('/register', require('./routes/api/registerUser'));
 app.use('/visionAPI', require('./routes/api/visionAPI'));
+app.use('/check-eligibility', require('./routes/api/checkEligibility'));
 
 // custom error handling 
 app.use(errorHandler);

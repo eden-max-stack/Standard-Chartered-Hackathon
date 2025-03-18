@@ -1,8 +1,13 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import "./App.css";
+import { signOut } from "firebase/auth";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../firebase/config";
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const ProfileSetup: React.FC = () => {
+  const [user] = useAuthState(auth);
   const [name, setName] = useState("");
   const [age, setAge] = useState<number | null>(null);
   const [gender, setGender] = useState("");
@@ -13,6 +18,8 @@ const ProfileSetup: React.FC = () => {
     pan: 'initial',
     income: 'initial',
   });
+
+  const navigate = useNavigate();
   
   const [capturing, setCapturing] = useState(false);
   const [selectedType, setSelectedType] = useState<'aadhaar' | 'pan' | 'income' | null>(null);
@@ -124,6 +131,25 @@ const ProfileSetup: React.FC = () => {
     }
   };
 
+  useEffect(() => {
+    const userSession = sessionStorage.getItem("user");
+
+    if (!user || !userSession) {
+      navigate("/register");
+      return;
+    }
+  }, [user, navigate]);
+
+  const handleSignOut = async () => {
+    try {
+        await signOut(auth);
+        sessionStorage.removeItem("user");
+        navigate("/register");
+    } catch (error) {
+        console.error("Sign-out error:", error);
+    }
+  };
+
   return (
     <div className="max-w-2xl mx-auto p-6 bg-white shadow-lg rounded-lg text-black">
       <h1 className="text-2xl font-bold mb-4 text-black">Profile Setup</h1>
@@ -211,7 +237,9 @@ const ProfileSetup: React.FC = () => {
         capturing={capturing}
       />
 
-<button onClick={handleSubmit} className="w-full bg-blue-500 text-white p-2 rounded mt-4 hover:bg-blue-600">Submit All</button>
+      <button onClick={handleSubmit} className="w-full bg-blue-500 text-white p-2 rounded mt-4 hover:bg-blue-600">Submit All</button>
+      <button onClick={handleSignOut} className="w-full bg-blue-500 text-white p-2 rounded mt-4 hover:bg-blue-600">Sign Out</button>
+      
     </div>
   );
 }
