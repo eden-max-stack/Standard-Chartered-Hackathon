@@ -44,22 +44,53 @@ cd Standard-Chartered-Hackathon
 
 
 # Install dependencies
-npm install
+cd client
+npm install express router path date-fns cors # for backend
+
+cd server
+npm install convex react-router-dom @mui/material @emotion/react @emotion/styled axios # for frontend
+
 # Python Dependencies to run the backend server 
 pip install fastapi uvicorn opencv-python numpy mtcnn deepface python-multipart sentence-transformers torch
 ```
 
-## Usage
+## Usage: To open 5 terminals
+### Terminal 1: Run frontend
 ```sh
-# Start the application
-npm start  (To run the frontend)
-python server.py (To run the backend)
+cd client/my-app
+npm run dev
+```
+
+### Terminal 2: Run backend
+```sh
+cd server
+node server.js
+```
+
+### Terminal 3: Connect to DB
+```sh
+cd client/my-app
+npx convex dev
+```
+
+### Terminal 4: Virtual AI Branch Manager
+```sh
+.venv/Scripts/activate
+cd server/python_backend
+py server.py
+```
+
+### Terminal 5: Customer Interaction
+```sh
+.venv/Scripts/activate
+cd server/python_backend
+py face_upload.py
 ```
 
 ## Technologies Used
-- React TS, Material UI
-- Node JS, Express JS
-- Python, Uvicorn, PyTorch, OpenCV, Keras 
+- Frontend: React TS, TailwindCSS, Material UI
+- Backend: Node JS, Express JS
+- AI: Python, Uvicorn, PyTorch, OpenCV, Keras 
 
 ## Contributing
 Feel free to submit a pull request if you'd like to contribute! 😊
