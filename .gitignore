@@ -136,3 +136,5 @@ dist
 .pnp.*
 
 service-account.json
+
+fine_tuned_sbert.pkl
