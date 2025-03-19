@@ -45,7 +45,7 @@ cd Standard-Chartered-Hackathon
 
 # Install dependencies
 npm install
-Python Dependencies to run the backend server 
+# Python Dependencies to run the backend server 
 pip install fastapi uvicorn opencv-python numpy mtcnn deepface python-multipart sentence-transformers torch
 ```
 
