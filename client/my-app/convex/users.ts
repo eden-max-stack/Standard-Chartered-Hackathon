@@ -5,26 +5,55 @@ import { query } from "./_generated/server";
 
 export const createUser = mutation({
   args: {
+    uid: v.string(),
     name: v.string(),
     email: v.string(),
     password: v.string(),
     customerID: v.string(),
     age: v.number(),
     income: v.number(),
+    accounts: v.number(),
+    loans: v.number()
   },
-  handler: async ({ db }, { name, email, password, customerID, age, income }) => {
+  handler: async ({ db }, { uid, name, email, password, customerID, age, income, accounts, loans }) => {
     // Store hashed passwords in a real-world scenario
     const userId = await db.insert("users", {
+      uid,
       name,
       email,
       password,
       customerID,
       income,
       age,
+      accounts,
+      loans,
       createdAt: Date.now(),
     });
 
     return userId;
+  },
+});
+
+export const incrementAccountCount = mutation({
+  args: { uid: v.string() },
+  handler: async ({ db }, { uid }) => {
+    const user = await db.query("users").filter((q) => q.eq(q.field("uid"), uid)).first();
+    
+    if (!user) throw new Error("User not found");
+
+    // Increment account count
+    await db.patch(user._id, { accounts: (user.accounts ?? 0) + 1 });
+  },
+});
+export const incrementLoanCount = mutation({
+  args: { uid: v.string() },
+  handler: async ({ db }, { uid }) => {
+    const user = await db.query("users").filter((q) => q.eq(q.field("uid"), uid)).first();
+    
+    if (!user) throw new Error("User not found");
+
+    // Increment account count
+    await db.patch(user._id, { loans: (user.loans ?? 0) + 1 });
   },
 });
 
@@ -45,7 +74,7 @@ export const getUserByUid = query({
     handler: async ({ db }, { uid }) => {
       const user = await db
         .query("users")
-        .filter((q) => q.eq(q.field("_id"), uid))
+        .filter((q) => q.eq(q.field("uid"), uid))
         .first();
   
       return user;

@@ -66,6 +66,7 @@ export const createAccount = mutation({
       account: v.object({
         type: v.optional(v.literal("savings")),
         depositAmount: v.number(),
+        accountId: v.string()
       }),
     },
     handler: async (ctx, args) => {

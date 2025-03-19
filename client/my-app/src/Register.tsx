@@ -2,20 +2,21 @@ import React, { useState } from "react";
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { auth } from '../firebase/config';
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import { api } from "../convex/_generated/api";
-import { useMutation } from "convex/react";
+// import axios from "axios";
+// import { api } from "../convex/_generated/api";
+// import { useMutation } from "convex/react";
 
 const Register: React.FC = () => {
     const [name, setName] = useState('');
-    const [customerId, setCustomerId] = useState('');
-    const [income, setIncome] = useState(0);
-    const [age, setAge] = useState(0);
+    // const [uid, setUid] = useState('');
+    // const [customerId, setCustomerId] = useState('');
+    // const [income, setIncome] = useState(0);
+    // const [age, setAge] = useState(0);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
 
-    const createUser = useMutation(api.users.createUser);
+    // const createUser = useMutation(api.users.createUser);
 
     const [createUserWithEmailAndPassword, user, loading, error] = useCreateUserWithEmailAndPassword(auth);
 
@@ -35,15 +36,17 @@ const Register: React.FC = () => {
 
                 console.log("Success! User registered:", res.user);
 
-                const newUser = await createUser({
-                    name: name,
-                    age: age,
-                    customerID: customerId,
-                    income: income,
-                    email: email,
-                    password: password
-                });
-                console.log(newUser);
+                // const newUser = await createUser({
+                //     uid: uid,
+                //     name: name,
+                //     age: age,
+                //     customerID: customerId,
+                //     income: income,
+                //     email: email,
+                //     password: password,
+                //     accounts: 0
+                // });
+                // console.log(newUser);
                 setEmail('');
                 setPassword('');
                 navigate('/login');
@@ -73,7 +76,7 @@ const Register: React.FC = () => {
                     onChange={(e) => setEmail(e.target.value)}
                     required
                 />
-                <label htmlFor="customerId">Customer ID:</label>
+                {/* <label htmlFor="customerId">Customer ID:</label>
                 <input
                     type="text" 
                     id="customerId"
@@ -96,7 +99,7 @@ const Register: React.FC = () => {
                     value={income}
                     onChange={(e) => setIncome(Number(e.target.value))}
                     required
-                />
+                /> */}
 
                 <label htmlFor="password">Password:</label>
                 <input
