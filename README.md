@@ -30,7 +30,7 @@ SkyNet is an **AI-powered virtual branch manager** that provides a **video-based
 - Instant feedback: ✅ **Approved** | ❌ **Rejected** | 🔄 **More Info Needed**.  
 
 ## Demo Video 🎥
-[![Watch the Demo](https://img.shields.io/badge/Watch%20Demo-Click%20Here-blue?style=for-the-badge)](https://drive.google.com/file/d/1RAdt4GDc8-QWoIj4sw7olrMs35C_Xiai/view?usp=sharing)
+[![Watch the Demo](https://img.shields.io/badge/Watch%20Demo-Click%20Here-blue?style=for-the-badge)](https://drive.google.com/file/d/1k7YmHfWDa9LAMI13XD6ENo-EpHyq1Q-D/view?usp=sharing)
 
 > Click the badge above to watch the demo video.
 
